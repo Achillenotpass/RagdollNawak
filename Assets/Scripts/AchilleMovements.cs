@@ -26,11 +26,11 @@ public class AchilleMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             m_SpineRigidBody.AddRelativeTorque(new Vector3(1.0f, 0.0f, 0.0f) * m_RotationForce);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             m_SpineRigidBody.AddRelativeTorque(new Vector3(-1.0f, 0.0f, 0.0f) * m_RotationForce);
         }
