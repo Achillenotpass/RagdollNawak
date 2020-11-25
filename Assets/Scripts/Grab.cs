@@ -9,7 +9,18 @@ public class Grab : MonoBehaviour
     private LayerMask m_GrabLayerMask = 0;
     [SerializeField]
     private float m_grabDistance = 0.5f;
+    [SerializeField]
+    private KeyCode m_GrabKey = KeyCode.M;
+    [SerializeField]
+    private GameObject m_JetPack = null;
+    private Rigidbody m_HandRigidbody = null;
 
+
+    //Awake is called before anything else, once
+    private void Awake()
+    {
+        m_HandRigidbody = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +33,7 @@ public class Grab : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            TryTograbObject();
+            MoveHand();
         }
 
         if (Input.GetKeyUp(KeyCode.A))
@@ -31,6 +42,12 @@ public class Grab : MonoBehaviour
         }
     }
 
+
+    public void MoveHand()
+    {
+        //m_HandRigidbody.AddForce(m_JetPack.transform.forward, ForceMode.Impulse);
+        Invoke(nameof(TryTograbObject), 0.5f);
+    }
 
     public void TryTograbObject()
     {
