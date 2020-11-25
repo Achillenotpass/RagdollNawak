@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class ArthurCamera : MonoBehaviour
 {
-    Transform player;
+    [Header("Parameters")]
+    [SerializeField]
+    bool m_UseOffset;
+    [SerializeField]
+    Vector3 m_Offset = new Vector3(0, -5, 10);
+    [SerializeField]
+    float m_RotateSpeed = 1;
 
-    public Vector3 offset = new Vector3(0, -5, 10);
-
-    public bool useOffset;
-
-    public float rotateSpeed = 1;
+    Transform m_player;
 
     void Start()
     {
-        player = FindObjectOfType<ArthurMovement>().transform;
+        m_player = FindObjectOfType<ArthurMovement>().transform;
 
-        if (!useOffset)
+        if (!m_UseOffset)
         {
-            offset = player.position - transform.position;
+            m_Offset = m_player.position - transform.position;
         }
 
         // Camoufler la souris
@@ -27,18 +29,18 @@ public class ArthurCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
-        player.Rotate(0, horizontal, 0);
+        float horizontal = Input.GetAxis("Mouse X") * m_RotateSpeed;
+        m_player.Rotate(0, horizontal, 0);
 
-        float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
-        player.Rotate(-vertical, 0, 0);
+        float vertical = Input.GetAxis("Mouse Y") * m_RotateSpeed;
+        m_player.Rotate(-vertical, 0, 0);
 
-        float desiredYAngle = player.eulerAngles.y;
-        float desiredXAngle = player.eulerAngles.x;
+        float desiredYAngle = m_player.eulerAngles.y;
+        float desiredXAngle = m_player.eulerAngles.x;
 
         Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0);
-        transform.position = player.position - (rotation * offset);
+        transform.position = m_player.position - (rotation * m_Offset);
 
-        transform.LookAt(player);
+        transform.LookAt(m_player);
     }
 }

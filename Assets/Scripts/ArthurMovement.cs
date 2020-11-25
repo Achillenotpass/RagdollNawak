@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class ArthurMovement : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    [SerializeField]
+    float m_MoveSpeed = 1f;
 
-    Rigidbody rbPlayer;
+    Rigidbody m_RbPlayer;
 
-    Vector3 moveDirection;
-
+    Vector3 m_MoveDirection;
 
     void Start()
     {
-        rbPlayer = GetComponent<Rigidbody>();
+        m_RbPlayer = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        moveDirection = (transform.forward * Input.GetAxisRaw("Vertical") * moveSpeed) + (transform.right * Input.GetAxisRaw("Horizontal") * moveSpeed);
+        m_MoveDirection = (transform.forward * Input.GetAxisRaw("Vertical") * m_MoveSpeed) + (transform.right * Input.GetAxisRaw("Horizontal") * m_MoveSpeed) + (transform.up * Input.GetAxisRaw("Altitude") * m_MoveSpeed);
 
-        moveDirection = moveDirection.normalized * moveSpeed;
+        m_MoveDirection = m_MoveDirection.normalized * m_MoveSpeed;
 
-        rbPlayer.velocity = moveDirection * Time.deltaTime;
+        m_RbPlayer.velocity = m_MoveDirection * Time.deltaTime;
     }
 }
