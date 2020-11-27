@@ -11,7 +11,6 @@ public class CatchArea : MonoBehaviour
 
     private void Update()
     {
-
         astronautsNumber = astronauts.Count;
 
         if (astronauts.Count == 0)
@@ -19,19 +18,17 @@ public class CatchArea : MonoBehaviour
             Debug.Log("gagné");
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-
         GameObject collidedObject = other.gameObject;
 
         foreach (GameObject astronaut in astronauts)
         {
             if (collidedObject == astronaut)
             {
-                GameObject Parent;
-                Parent = collidedObject.transform.parent.gameObject;
                 astronauts.Remove(astronaut);
-                Destroy(Parent);
+                Destroy(collidedObject.transform.parent.parent.parent.gameObject);
                
                 break;
             }

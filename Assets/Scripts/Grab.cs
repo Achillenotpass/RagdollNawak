@@ -12,12 +12,14 @@ public class Grab : MonoBehaviour
     [SerializeField]
     private float m_GrabForce = 15.0f;
     private Rigidbody m_HandRigidbody = null;
+    [SerializeField]
+    private Transform m_HandTransform = null;
 
 
     //Awake is called before anything else, once
     private void Awake()
     {
-        m_HandRigidbody = GetComponent<Rigidbody>();
+        m_HandRigidbody = m_HandTransform.gameObject.GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
@@ -51,7 +53,7 @@ public class Grab : MonoBehaviour
     {
         Collider[] l_NearObjects = null;
 
-        l_NearObjects = Physics.OverlapSphere(transform.position, m_GrabDistance, m_GrabLayerMask);
+        l_NearObjects = Physics.OverlapSphere(m_HandTransform.position, m_GrabDistance, m_GrabLayerMask);
         if (l_NearObjects.Length != 0)
         {
             m_GrabbedObject = l_NearObjects[0].gameObject;
@@ -71,5 +73,10 @@ public class Grab : MonoBehaviour
             Destroy(m_GrabbedObject.GetComponent<FixedJoint>());
         }
     }
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(m_HandTransform.position, m_GrabDistance);
+    }
+
 }

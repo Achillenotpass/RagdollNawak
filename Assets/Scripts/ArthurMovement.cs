@@ -22,6 +22,6 @@ public class ArthurMovement : MonoBehaviour
 
         m_MoveDirection = m_MoveDirection.normalized * m_MoveSpeed;
 
-        m_RbPlayer.velocity = m_MoveDirection * Time.deltaTime;
+        m_RbPlayer.velocity = m_MoveDirection * Time.fixedDeltaTime;
     }
 }
