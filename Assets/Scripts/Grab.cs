@@ -45,7 +45,7 @@ public class Grab : MonoBehaviour
 
     public void MoveHand()
     {
-        m_HandRigidbody.AddForce(Vector3.forward * 1500.0f, ForceMode.Impulse);
+        m_HandRigidbody.AddRelativeForce(Vector3.forward * 5.0f, ForceMode.Impulse);
         Invoke(nameof(TryTograbObject), 0.5f);
     }
 
