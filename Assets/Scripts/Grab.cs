@@ -10,9 +10,9 @@ public class Grab : MonoBehaviour
     [SerializeField]
     private float m_grabDistance = 0.5f;
     [SerializeField]
-    private KeyCode m_GrabKey = KeyCode.M;
+    private float m_grabForce = 15.0f;
     [SerializeField]
-    private GameObject m_JetPack = null;
+    private KeyCode m_GrabKey = KeyCode.M;
     private Rigidbody m_HandRigidbody = null;
 
 
@@ -31,12 +31,12 @@ public class Grab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(m_GrabKey))
+        if (Input.GetMouseButtonDown(0))
         {
             MoveHand();
         }
 
-        if (Input.GetKeyUp(m_GrabKey))
+        if (Input.GetMouseButtonUp(0))
         {
             UngrabObject();
         }
@@ -45,7 +45,7 @@ public class Grab : MonoBehaviour
 
     public void MoveHand()
     {
-        m_HandRigidbody.AddRelativeForce(Vector3.forward * 15.0f, ForceMode.Impulse);
+        m_HandRigidbody.AddRelativeForce(Vector3.forward * m_grabForce, ForceMode.Impulse);
         Invoke(nameof(TryTograbObject), 0.5f);
     }
 
