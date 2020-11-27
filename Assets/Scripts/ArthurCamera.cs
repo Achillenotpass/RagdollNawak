@@ -29,9 +29,11 @@ public class ArthurCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        // Permet de rotate le player sur l'horizontale
         float horizontal = Input.GetAxis("Mouse X") * m_RotateSpeed;
         m_player.Rotate(0, horizontal, 0);
 
+        // Pareil pour la vertical
         float vertical = Input.GetAxis("Mouse Y") * m_RotateSpeed;
         m_player.Rotate(-vertical, 0, 0);
 
@@ -42,5 +44,7 @@ public class ArthurCamera : MonoBehaviour
         transform.position = m_player.position - (rotation * m_Offset);
 
         transform.LookAt(m_player);
+
+        // m_player.transform.forward = transform.forward;
     }
 }
