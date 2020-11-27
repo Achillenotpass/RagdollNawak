@@ -28,8 +28,10 @@ public class CatchArea : MonoBehaviour
         {
             if (collidedObject == astronaut)
             {
+                GameObject Parent;
+                Parent = collidedObject.transform.parent.gameObject;
                 astronauts.Remove(astronaut);
-                Destroy(collidedObject);
+                Destroy(Parent);
                
                 break;
             }
