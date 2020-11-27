@@ -31,12 +31,12 @@ public class Grab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(m_GrabKey))
         {
             MoveHand();
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(m_GrabKey))
         {
             UngrabObject();
         }
@@ -45,7 +45,7 @@ public class Grab : MonoBehaviour
 
     public void MoveHand()
     {
-        //m_HandRigidbody.AddForce(m_JetPack.transform.forward, ForceMode.Impulse);
+        m_HandRigidbody.AddForce(Vector3.forward * 1500.0f, ForceMode.Impulse);
         Invoke(nameof(TryTograbObject), 0.5f);
     }
 
@@ -73,4 +73,5 @@ public class Grab : MonoBehaviour
             Destroy(m_GrabbedObject.GetComponent<FixedJoint>());
         }
     }
+    
 }
