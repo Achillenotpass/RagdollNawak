@@ -8,11 +8,9 @@ public class Grab : MonoBehaviour
     [SerializeField]
     private LayerMask m_GrabLayerMask = 0;
     [SerializeField]
-    private float m_grabDistance = 0.5f;
+    private float m_GrabDistance = 0.5f;
     [SerializeField]
-    private float m_grabForce = 15.0f;
-    [SerializeField]
-    private KeyCode m_GrabKey = KeyCode.M;
+    private float m_GrabForce = 15.0f;
     private Rigidbody m_HandRigidbody = null;
 
 
@@ -45,7 +43,7 @@ public class Grab : MonoBehaviour
 
     public void MoveHand()
     {
-        m_HandRigidbody.AddRelativeForce(Vector3.forward * m_grabForce, ForceMode.Impulse);
+        m_HandRigidbody.AddRelativeForce(Vector3.forward * m_GrabForce, ForceMode.Impulse);
         Invoke(nameof(TryTograbObject), 0.5f);
     }
 
@@ -53,7 +51,7 @@ public class Grab : MonoBehaviour
     {
         Collider[] l_NearObjects = null;
 
-        l_NearObjects = Physics.OverlapSphere(transform.position, m_grabDistance, m_GrabLayerMask);
+        l_NearObjects = Physics.OverlapSphere(transform.position, m_GrabDistance, m_GrabLayerMask);
         if (l_NearObjects.Length != 0)
         {
             m_GrabbedObject = l_NearObjects[0].gameObject;
