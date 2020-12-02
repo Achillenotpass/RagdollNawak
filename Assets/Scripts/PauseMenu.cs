@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject screenPause;
-    bool isPauseDisplay = false;
+    public bool isPauseDisplay = false;
 
     private void Update()
     {
@@ -33,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         screenPause.SetActive(false);
         isPauseDisplay = false;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InGameUI : MonoBehaviour
 {
     [SerializeField]
-    private Text m_AstroNumber;
+    private Text m_AstroNumber = null;
 
     private CatchArea m_CatchArea;
 
