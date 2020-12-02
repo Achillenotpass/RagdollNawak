@@ -76,7 +76,7 @@ public class Grab : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(m_HandTransform.position, m_GrabDistance);
+        Gizmos.DrawWireSphere(m_HandTransform.position, m_GrabDistance);
     }
 
 }
