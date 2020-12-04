@@ -8,7 +8,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private Text m_AstroNumber = null;
 
-    private CatchArea m_CatchArea;
+    private CatchArea m_CatchArea = null;
 
     private void Start()
     {
@@ -17,6 +17,6 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        m_AstroNumber.text =" x " +m_CatchArea.astronautsNumber;
+        m_AstroNumber.text =" x " + m_CatchArea.AstronautsNumber;
     }
 }

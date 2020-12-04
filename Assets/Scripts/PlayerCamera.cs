@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArthurCamera : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField]
@@ -12,14 +12,18 @@ public class ArthurCamera : MonoBehaviour
     [SerializeField]
     float m_RotateSpeed = 1;
 
-    Transform m_Player;
-    PauseMenu m_PauseMenu;
+    // Références
+    Transform m_Player = null;
+    PauseMenu m_PauseMenu = null;
+    CatchArea m_CatchArea = null;
 
     void Start()
     {
-        m_Player = FindObjectOfType<ArthurMovement>().transform;
+        m_Player = FindObjectOfType<PlayerMovement>().transform;
 
         m_PauseMenu = FindObjectOfType<PauseMenu>();
+        
+        m_CatchArea = FindObjectOfType<CatchArea>();
 
         if (!m_UseOffset)
         {
@@ -32,7 +36,7 @@ public class ArthurCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!m_PauseMenu.isPauseDisplay)
+        if (!m_PauseMenu.IsPauseDisplay && !m_CatchArea.IsGameEnding)
         {
             // Permet de rotate le player sur l'horizontale
             float horizontal = Input.GetAxis("Mouse X") * m_RotateSpeed;

@@ -5,17 +5,30 @@ using UnityEngine;
 public class CatchArea : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> astronauts = new List<GameObject>();
+    private List<GameObject> m_Astronauts = new List<GameObject>();
 
-    public int astronautsNumber;
+    [SerializeField]
+    GameObject m_MenuToShow = null;
+
+    private bool m_IsGameEnding = false;
+
+    int m_AstronautsNumber = 0;
+
+    private void Start()
+    {
+        m_AstronautsNumber = m_Astronauts.Count;
+    }
 
     private void Update()
     {
-        astronautsNumber = astronauts.Count;
+        m_AstronautsNumber = m_Astronauts.Count;
 
-        if (astronauts.Count == 0)
+        if (m_Astronauts.Count == 0)
         {
-            Debug.Log("gagné");
+            m_IsGameEnding = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            m_MenuToShow.SetActive(true);
         }
     }
 
@@ -23,15 +36,31 @@ public class CatchArea : MonoBehaviour
     {
         GameObject collidedObject = other.gameObject;
 
-        foreach (GameObject astronaut in astronauts)
+        foreach (GameObject astronaut in m_Astronauts)
         {
             if (collidedObject == astronaut)
             {
-                astronauts.Remove(astronaut);
+                m_Astronauts.Remove(astronaut);
                 Destroy(collidedObject.transform.parent.parent.parent.gameObject);
-               
+
                 break;
             }
+        }
+    }
+
+    public bool IsGameEnding
+    {
+        get
+        {
+            return m_IsGameEnding;
+        }
+    }
+
+    public int AstronautsNumber
+    {
+        get
+        {
+            return m_AstronautsNumber;
         }
     }
 }

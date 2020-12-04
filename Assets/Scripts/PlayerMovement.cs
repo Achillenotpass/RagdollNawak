@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArthurMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     float m_MoveSpeed = 1f;
 
-    Rigidbody m_RbPlayer;
+    Rigidbody m_RbPlayer = null;
 
-    Vector3 m_MoveDirection;
+    Vector3 m_MoveDirection = Vector3.zero;
 
     void Start()
     {

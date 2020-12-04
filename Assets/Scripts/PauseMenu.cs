@@ -5,20 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject screenPause;
-    public bool isPauseDisplay = false;
+    [SerializeField]
+    GameObject m_ScreenPause = null;
+
+    bool m_IsPauseDisplay = false;
+
+    CatchArea m_CatchArea = null;
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+
+        m_CatchArea = FindObjectOfType<CatchArea>();
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!m_CatchArea.IsGameEnding)
         {
-            if (!isPauseDisplay)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PauseGame();
-            }
-            else if (isPauseDisplay)
-            {
-                ResumeGame();
+                if (!m_IsPauseDisplay)
+                {
+                    PauseGame();
+                }
+                else if (m_IsPauseDisplay)
+                {
+                    ResumeGame();
+                }
             }
         }
     }
@@ -27,23 +41,37 @@ public class PauseMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
-        screenPause.SetActive(true);
-        isPauseDisplay = true;
+        m_ScreenPause.SetActive(true);
+        m_IsPauseDisplay = true;
     }
 
     public void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
-        screenPause.SetActive(false);
-        isPauseDisplay = false;
+        m_ScreenPause.SetActive(false);
+        m_IsPauseDisplay = false;
+    }
+
+    public void ReloadGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoToMenu()
     {
         Time.timeScale = 1;
-        screenPause.SetActive(false);
-        isPauseDisplay = false;
+        m_ScreenPause.SetActive(false);
+        m_IsPauseDisplay = false;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public bool IsPauseDisplay
+    {
+        get
+        {
+            return m_IsPauseDisplay;
+        }
     }
 }
