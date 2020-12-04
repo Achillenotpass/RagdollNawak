@@ -54,7 +54,10 @@ public class PlayerCamera : MonoBehaviour
 
             transform.LookAt(m_Player);
 
-            // m_player.transform.forward = transform.forward;
+            if (Input.GetMouseButton(1))
+            {
+                m_Player.transform.forward = transform.forward;
+            }
         }
     }
 }

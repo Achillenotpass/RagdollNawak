@@ -15,6 +15,9 @@ public class Grab : MonoBehaviour
     [SerializeField]
     private Transform m_HandTransform = null;
 
+    [SerializeField]
+    ParticleSystem m_ParticleGrab = null;
+
 
     //Awake is called before anything else, once
     private void Awake()
@@ -63,6 +66,8 @@ public class Grab : MonoBehaviour
 
     public void GrabObject()
     {
+        m_ParticleGrab.Play();
+
         m_GrabbedObject.AddComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
     }
 
